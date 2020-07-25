@@ -1,7 +1,3 @@
-# Based on:
-# Detectron.pytorch/lib/setup.py
-# and modified for this project
-# Original source license text:
 # --------------------------------------------------------
 # Fast R-CNN
 # Copyright (c) 2015 Microsoft
@@ -28,8 +24,15 @@ except AttributeError:
 
 ext_modules = [
     Extension(
-        name='utils_rel.cython_bbox_rel',
-        sources=['utils_rel/cython_bbox_rel.pyx'],
+        name='utils.cython_bbox',
+        sources=['utils/cython_bbox.pyx'],
+        extra_compile_args=['-Wno-cpp'],
+        include_dirs=[numpy_include],
+        extra_link_args=['-L/usr/lib/x86_64-linux-gnu/'],
+    ),
+    Extension(
+        name='utils.cython_nms',
+        sources=['utils/cython_nms.pyx'],
         extra_compile_args=['-Wno-cpp'],
         include_dirs=[numpy_include],
         extra_link_args=['-L/usr/lib/x86_64-linux-gnu/'],
@@ -37,7 +40,7 @@ ext_modules = [
 ]
 
 setup(
-    name='mask_rcnn_rel',
+    name='mask_rcnn',
     ext_modules=cythonize(ext_modules)
 )
 
