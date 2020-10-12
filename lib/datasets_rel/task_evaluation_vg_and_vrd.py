@@ -142,8 +142,8 @@ def eval_rel_results(all_results, output_dir, topk=100, do_val=True):
                     recalls[k] = float(recalls[k]) / (float(all_gt_cnt) + 1e-12)
                 print_stats(recalls)
                 
-        print('Saving topk dets...')
         topk_dets_f = os.path.join(output_dir, 'rel_detections_topk.pkl')
+        print(f'Saving topk dets...{topk_dets_f}')
         with open(topk_dets_f, 'wb') as f:
             pickle.dump(topk_dets, f, pickle.HIGHEST_PROTOCOL)
         logger.info('topk_dets size: {}'.format(len(topk_dets)))

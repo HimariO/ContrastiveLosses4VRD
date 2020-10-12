@@ -131,6 +131,7 @@ def test_net_on_dataset(
         multi_gpu=False,
         gpu_id=0):
     """Run inference on a dataset."""
+    # model = initialize_model_from_cfg(args, gpu_id=gpu_id)
     dataset = JsonDatasetRel(dataset_name)
     test_timer = Timer()
     test_timer.tic()
@@ -295,7 +296,12 @@ def initialize_model_from_cfg(args, gpu_id=0):
         logger.info("loading detectron weights %s", args.load_detectron)
         load_detectron_weight(model, args.load_detectron)
 
-    model = mynn.DataParallel(model, cpu_keywords=['im_info', 'roidb'], minibatch=True)
+    device_ids = None if args.multi_gpu_testing else [0]
+    model = mynn.DataParallel(
+        model,
+        cpu_keywords=['im_info', 'roidb'],
+        minibatch=True,
+        device_ids=device_ids)
 
     return model
 

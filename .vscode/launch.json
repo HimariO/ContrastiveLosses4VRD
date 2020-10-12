@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "infer_net_rel oid",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/infer_net_rel.py",
+            "args": [
+                "--dataset", "oi_rel",
+                "--cfg", "configs/oi_rel/e2e_faster_rcnn_X-101-64x4d-FPN_12_epochs_oi_rel_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5.yaml",
+                "--load_ckpt", "trained_models/oi_X-101-64x4d-FPN/model_step80929.pth",
+                "--output_dir", "Outputs/oi_X-101-64x4d-FPN",
+                "--do_val"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "infer_net_rel vg",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/infer_net_rel.py",
+            "args": [
+                "--dataset", "vg",
+                "--cfg", "configs/vg/e2e_faster_rcnn_X-101-64x4d-FPN_8_epochs_vg_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5.yaml",
+                "--load_ckpt", "trained_models/vg_X-101-64x4d-FPN/model_step62722.pth",
+                "--output_dir", "Outputs/vg_X-101-64x4d-FPN",
+                "--do_val"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+}
